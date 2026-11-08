@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
       </p>
 
       <p style={{ color: '#475569', fontSize: '11px' }}>
-        Mirror Moment &copy; 2026. Built with YouCam Skin AI & Apparel Virtual Try-On APIs.
+        Mirror Vibes &copy; 2026. Built with YouCam virtual try-on.
       </p>
     </footer>
   );

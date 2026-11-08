@@ -1133,7 +1133,7 @@ export default function StudioFlow({ isGuest = false }: StudioFlowProps) {
                   <div className="space-y-3 pt-2">
                     <a
                       href={resultUrl}
-                      download={`mirror-moment-${itemName.toLowerCase().replace(/\s+/g, '-')}.png`}
+                      download={`mirror-vibes-${itemName.toLowerCase().replace(/\s+/g, '-')}.png`}
                       className="block w-full"
                     >
                       <Button variant="primary" size="md" className="w-full" leftIcon={<Download size={16} />}>

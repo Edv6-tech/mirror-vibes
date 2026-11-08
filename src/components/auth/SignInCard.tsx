@@ -111,7 +111,7 @@ export function SignInCard() {
       </form>
 
       <p className="text-center text-sm text-[var(--ink-500)]">
-        New to Mirror Moment?{' '}
+        New to Mirror Vibes?{' '}
         <Link href="/signup" className="font-semibold text-[var(--blue-700)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-600)]">
           Create an account
         </Link>

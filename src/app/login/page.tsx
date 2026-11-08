@@ -5,8 +5,8 @@ import { AuroraBackground } from '@/components/ui/AuroraBackground';
 import { SignInCard } from '@/components/auth/SignInCard';
 
 export const metadata: Metadata = {
-  title: 'Sign in — Mirror Moment',
-  description: 'Sign in to Mirror Moment with your email and password to revisit saved looks.',
+  title: 'Sign in — Mirror Vibes',
+  description: 'Sign in to Mirror Vibes with your email and password to revisit saved looks.',
 };
 
 export default function LoginPage() {
@@ -16,7 +16,7 @@ export default function LoginPage() {
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-[1fr_440px] md:gap-16">
           <section className="hidden md:block">
             <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--blue-700)] hover:text-[var(--blue-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-600)] rounded-md">
-              <ArrowLeft size={16} aria-hidden="true" /> Back to Mirror Moment
+              <ArrowLeft size={16} aria-hidden="true" /> Back to Mirror Vibes
             </Link>
             <p className="mt-16 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--blue-700)]">Your next look awaits</p>
             <h2 className="mt-4 max-w-xl font-display text-[clamp(42px,6vw,76px)] leading-[0.98] text-[var(--ink-900)]">

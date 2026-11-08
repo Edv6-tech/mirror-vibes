@@ -321,7 +321,7 @@ export default function SettingsPage() {
       >
         <div className="space-y-4">
           <p className="text-sm text-[var(--ink-500)] leading-relaxed">
-            Please type <span className="font-mono font-bold text-[var(--danger)]">DELETE</span> to confirm that you want to wipe all your data from Mirror Moment.
+            Please type <span className="font-mono font-bold text-[var(--danger)]">DELETE</span> to confirm that you want to wipe all your data from Mirror Vibes.
           </p>
 
           <Input

@@ -145,7 +145,7 @@ export default function DashboardPage() {
                 M
               </span>
               <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white">
-                Mirror Moment
+                Mirror Vibes
               </span>
             </Link>
 

@@ -1006,7 +1006,7 @@ export const VirtualTryOnView: React.FC<VirtualTryOnViewProps> = ({
 
               <div style={{ padding: '12px', textAlign: 'left' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Mirror Moment</span>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Mirror Vibes</span>
                   <span style={{ fontSize: '10px', color: '#10B981', fontWeight: 700 }}>
                     {harmony.score}% Harmony
                   </span>

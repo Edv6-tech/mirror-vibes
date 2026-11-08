@@ -89,11 +89,11 @@ function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sky-400)] rounded-lg"
-          aria-label="Mirror Moment home"
+          aria-label="Mirror Vibes home"
         >
           <Sparkles size={20} className="text-[var(--blue-600)]" aria-hidden="true" />
           <span className="font-display text-[22px] font-semibold text-[var(--ink-900)]">
-            Mirror Moment
+            Mirror Vibes
           </span>
         </Link>
 
@@ -556,7 +556,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-white/60">
           <div className="flex items-center gap-2">
             <Sparkles size={16} className="text-[var(--sky-400)]" aria-hidden="true" />
-            <span className="font-display text-[18px] font-semibold text-white">Mirror Moment</span>
+            <span className="font-display text-[18px] font-semibold text-white">Mirror Vibes</span>
           </div>
           <nav aria-label="Footer navigation" className="flex items-center gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sky-400)] rounded">

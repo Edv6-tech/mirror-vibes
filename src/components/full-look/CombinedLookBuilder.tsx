@@ -333,7 +333,7 @@ export default function CombinedLookBuilder() {
               <div className="flex flex-wrap gap-2">
                 {orderedFeatures.map((feature) => <span key={feature} className="rounded-full bg-[var(--ice-100)] px-3 py-1 text-xs font-bold text-[var(--blue-700)]">{FEATURE_COPY[feature].label}</span>)}
               </div>
-              <a href={resultUrl} download="mirror-moments-full-look.jpg" className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--line)] bg-white px-5 py-2 text-sm font-bold text-[var(--ink-900)] hover:bg-[var(--ice-100)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--blue-700)]"><Download size={16} aria-hidden="true" /> Save combined look</a>
+              <a href={resultUrl} download="mirror-vibes-full-look.jpg" className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--line)] bg-white px-5 py-2 text-sm font-bold text-[var(--ink-900)] hover:bg-[var(--ice-100)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--blue-700)]"><Download size={16} aria-hidden="true" /> Save combined look</a>
             </div>
           )}
 

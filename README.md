@@ -1,6 +1,6 @@
-# Mirror Moment
+# Mirror Vibes
 
-**Try a dress before you decide.** Mirror Moment lets a shopper lift a dress from a photo, preview it on their own photo, and keep the pieces and results they want to revisit.
+**Try a dress before you decide.** Mirror Vibes lets a shopper lift a dress from a photo, preview it on their own photo, and keep the pieces and results they want to revisit.
 
 This repository is the Mirror Vibes project copy. The current app is built around the **Try-On Commerce** track: one clear dress try-on flow supported by a personal wardrobe and saved looks.
 

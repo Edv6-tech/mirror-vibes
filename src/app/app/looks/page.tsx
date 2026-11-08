@@ -217,7 +217,7 @@ export default function LooksPage() {
                   {/* Hover Download Button */}
                   <a
                     href={look.resultImage}
-                    download="mirror-moment-look.jpg"
+                    download="mirror-vibes-look.jpg"
                     title="Download look"
                     className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-dashboard-gradient text-white flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 shadow-md"
                   >

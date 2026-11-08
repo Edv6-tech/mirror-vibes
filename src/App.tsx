@@ -163,7 +163,7 @@ export const App: React.FC = () => {
             M
           </div>
           <span style={{ fontWeight: 800, fontSize: '17px', letterSpacing: '-0.02em' }}>
-            Mirror Moment
+            Mirror Vibes
           </span>
         </div>
 

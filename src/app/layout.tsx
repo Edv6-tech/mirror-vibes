@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Mirror Moment — Wear the dress before it’s yours',
+  title: 'Mirror Vibes — Wear the dress before it’s yours',
   description:
     'A virtual dress try-on app. Lift a dress out of any photo, then see yourself wearing it.',
 };

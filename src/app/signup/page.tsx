@@ -4,8 +4,8 @@ import { AuroraBackground } from '@/components/ui/AuroraBackground';
 import { AuthCard } from '@/components/auth/AuthCard';
 
 export const metadata: Metadata = {
-  title: 'Sign up — Mirror Moment',
-  description: 'Create a free Mirror Moment account to save your wardrobe and looks.',
+  title: 'Sign up — Mirror Vibes',
+  description: 'Create a free Mirror Vibes account to save your wardrobe and looks.',
 };
 
 export default function SignupPage() {
@@ -32,7 +32,7 @@ export default function SignupPage() {
         {/* Wordmark */}
         <div className="relative z-10">
           <span className="font-display text-2xl text-white tracking-wide select-none">
-            Mirror<span className="text-[var(--sky-400)]"> Moment</span>
+            Mirror<span className="text-[var(--sky-400)]"> Vibes</span>
           </span>
         </div>
         {/* Quote */}
@@ -41,7 +41,7 @@ export default function SignupPage() {
             Your next favourite dress is one photo away.
           </p>
           <cite className="not-italic text-[13px] text-[var(--sky-400)] font-medium uppercase tracking-widest">
-            Mirror Moment
+            Mirror Vibes
           </cite>
         </blockquote>
       </div>
@@ -54,7 +54,7 @@ export default function SignupPage() {
         {/* Mobile wordmark */}
         <div className="md:hidden mb-8 text-center">
           <span className="font-display text-3xl text-[var(--ink-900)] tracking-wide select-none">
-            Mirror<span className="text-[var(--blue-600)]"> Moment</span>
+            Mirror<span className="text-[var(--blue-600)]"> Vibes</span>
           </span>
         </div>
 

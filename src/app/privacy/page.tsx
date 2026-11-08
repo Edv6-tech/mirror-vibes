@@ -4,8 +4,8 @@ import { ShieldCheck, Lock, EyeOff, Trash2, ArrowLeft } from 'lucide-react';
 import { GlassCard, Button } from '@/components/ui';
 
 export const metadata = {
-  title: 'Privacy Policy — Mirror Moment',
-  description: 'How Mirror Moment protects your photos, on-device AI extraction, and data retention rules.',
+  title: 'Privacy Policy — Mirror Vibes',
+  description: 'How Mirror Vibes handles uploaded photos, garment extraction, and saved data.',
 };
 
 export default function PrivacyPage() {
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             Your Photos Are Yours
           </h1>
           <p className="text-base text-[var(--ink-500)] mt-2">
-            Mirror Moment is engineered with a strict privacy-first architecture. Here is exactly what happens to your photos.
+            Mirror Vibes is designed to keep your styling photos private. Here is what happens to your photos.
           </p>
         </div>
 

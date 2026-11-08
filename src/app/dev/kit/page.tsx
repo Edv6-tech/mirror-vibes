@@ -33,7 +33,7 @@ export default function DevKitPage() {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">
-                Mirror Moment Component Kit
+                Mirror Vibes Component Kit
               </h1>
               <Chip label="Stage 1 · /dev/kit" variant={isDark ? 'dark' : 'ice'} />
             </div>
