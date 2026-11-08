@@ -8,73 +8,64 @@ import {
   ArrowRight,
   ChevronDown,
   Shirt,
-  Scissors,
-  Palette,
-  Footprints,
-  Eye,
-  Gem,
+  Images,
 } from 'lucide-react';
 import clsx from 'clsx';
 import FX7TiltCard from '@/components/effects/FX7TiltCard';
 
-// ── Categories (Strictly Lucide icons - ZERO emojis) ─────────────────────────
+// ── Hackathon focus: dress try-on, wardrobe, and saved looks ─────────────────
 const CATEGORIES = [
-  { id: 'all',      label: 'All',      icon: Sparkles },
-  { id: 'dresses',  label: 'Dress',    icon: Shirt },
-  { id: 'hair',     label: 'Hair',     icon: Scissors },
-  { id: 'makeup',   label: 'Makeup',   icon: Palette },
-  { id: 'shoes',    label: 'Shoes',    icon: Footprints },
-  { id: 'bags',     label: 'Bags',     icon: ShoppingBag },
-  { id: 'nails',    label: 'Nails',    icon: Sparkles },
-  { id: 'eyes',     label: 'Eye Color',icon: Eye },
-  { id: 'jewels',   label: 'Jewelry',  icon: Gem },
+  { id: 'all', label: 'All', icon: Sparkles },
+  { id: 'dresses', label: 'Dress try-on', icon: Shirt },
+  { id: 'wardrobe', label: 'Wardrobe', icon: ShoppingBag },
+  { id: 'looks', label: 'Saved looks', icon: Images },
 ];
 
-// ── Premium Shades Pills (Matching reference picture) ────────────────────────
+// ── Main fashion entry points ─────────────────────────────────────────────────
 const PREMIUM_SHADES = [
   {
     title: 'Dress Try-On',
-    action: 'Try a sample',
-    bg: 'bg-[#F9C3C6]',
-    text: 'text-[#8A1A24]',
-    btnBg: 'bg-[#EA384D] text-white',
+    action: 'Start with a sample',
+    bg: 'bg-white border border-[var(--line)]',
+    text: 'text-[var(--ink-900)]',
+    btnBg: 'bg-[var(--blue-700)] text-white',
     img: '/garments/garment_emerald_slip.jpg',
     alt: 'Model wearing an emerald evening dress',
     href: '/app/studio',
   },
   {
-    title: 'Hair Studio',
-    action: 'Explore styles',
-    bg: 'bg-[#FEE4A6]',
-    text: 'text-[#7D5200]',
-    btnBg: 'bg-[#D97706] text-white',
-    img: '/samples/hair-curly.jpg',
-    alt: 'Portrait featuring sleek long black hair',
-    href: '/app/studio?mode=hair',
-  },
-  {
-    title: 'Eye Colour',
-    action: 'Try lens colours',
-    bg: 'bg-[#E3E8EF]',
-    text: 'text-[#2D3748]',
-    btnBg: 'bg-[#4B5563] text-white',
-    img: '/samples/portrait-eyecolor.jpg',
-    alt: 'Close-up portrait of a woman with clear blue eyes',
-    href: '/app/eye-color',
+    title: 'Occasion dresses',
+    action: 'Browse dress samples',
+    bg: 'bg-white border border-[var(--line)]',
+    text: 'text-[var(--ink-900)]',
+    btnBg: 'bg-[var(--blue-700)] text-white',
+    img: '/garments/garment_gold_gown.jpg',
+    alt: 'Evening dress sample for a special occasion',
+    href: '/app/studio',
   },
   {
     title: 'My Wardrobe',
-    action: 'View saved looks',
-    bg: 'bg-[#DCCAC1]',
-    text: 'text-[#5C3F34]',
-    btnBg: 'bg-[#7C5040] text-white',
+    action: 'Revisit saved pieces',
+    bg: 'bg-white border border-[var(--line)]',
+    text: 'text-[var(--ink-900)]',
+    btnBg: 'bg-[var(--blue-700)] text-white',
     img: '/garments/garment_olive_overshirt.jpg',
     alt: 'Clothing rack with garments in a wardrobe',
     href: '/app/wardrobe',
   },
+  {
+    title: 'Saved Looks',
+    action: 'See your previews',
+    bg: 'bg-white border border-[var(--line)]',
+    text: 'text-[var(--ink-900)]',
+    btnBg: 'bg-[var(--blue-700)] text-white',
+    img: '/garments/garment_floral_blouse.jpg',
+    alt: 'Floral blouse saved as a style reference',
+    href: '/app/looks',
+  },
 ];
 
-// ── Featured try-on studios ─────────────────────────────────────────────────
+// ── Fashion-focused dashboard cards ──────────────────────────────────────────
 const CLOTHES_ITEMS = [
   {
     id: 'dress-try-on',
@@ -90,111 +81,38 @@ const CLOTHES_ITEMS = [
     icon: Shirt,
   },
   {
-    id: 'makeup-studio',
-    category: 'makeup',
-    title: 'Makeup Studio',
-    tag: 'BEAUTY',
-    desc: 'Preview a curated makeup look on your photo.',
-    leftLabel: '6 curated looks',
-    studio: 'Choose a look',
-    href: '/app/makeup',
-    img: '/hero-model.png',
-    alt: 'Close-up portrait for a makeup try-on preview',
-    icon: Palette,
-  },
-  {
-    id: 'hair-studio',
-    category: 'hair',
-    title: 'Hair Try-On',
-    tag: 'HAIR',
-    desc: 'Use a hairstyle reference to explore a new look.',
-    leftLabel: 'Add a reference',
-    studio: 'Add a reference',
-    href: '/app/studio?mode=hair',
-    img: '/samples/hair-curly.jpg',
-    alt: 'Woman with voluminous curly hair for hairstyle inspiration',
-    icon: Scissors,
-  },
-  {
-    id: 'shoe-studio',
-    category: 'shoes',
-    title: 'Shoes Try-On',
-    tag: 'FOOTWEAR',
-    desc: 'Preview shoes alongside your outfit photo.',
-    leftLabel: 'Choose a style',
-    studio: 'Choose a style',
-    href: '/app/studio?mode=shoes',
-    img: '/samples/shoes-heels.jpg',
-    alt: 'White pointed-toe stiletto heels',
-    icon: Footprints,
-  },
-  {
-    id: 'bag-studio',
-    category: 'bags',
-    title: 'Bag Try-On',
-    tag: 'ACCESSORIES',
-    desc: 'Preview a bag style with your look.',
-    leftLabel: 'Choose a style',
-    studio: 'Choose a style',
-    href: '/app/studio?mode=bag',
-    img: '/samples/bag-tote.jpg',
-    alt: 'Beige leather handbag with gold hardware on a light surface',
+    id: 'wardrobe',
+    category: 'wardrobe',
+    title: 'Your Wardrobe',
+    tag: 'SAVED PIECES',
+    desc: 'Keep dresses you have tried together in one place.',
+    leftLabel: 'View saved pieces',
+    studio: 'Your collection',
+    href: '/app/wardrobe',
+    img: '/garments/garment_olive_overshirt.jpg',
+    alt: 'Garment saved in a personal wardrobe',
     icon: ShoppingBag,
   },
   {
-    id: 'nail-studio',
-    category: 'nails',
-    title: 'Nail Studio',
-    tag: 'NAILS',
-    desc: 'Try polish colours, textures and press-on shapes.',
-    leftLabel: 'Pick a finish',
-    studio: 'Choose a finish',
-    href: '/app/nails',
-    img: '/samples/sample-hand.jpg',
-    alt: 'Glossy manicure detail for nail colour inspiration',
-    icon: Sparkles,
-  },
-  {
-    id: 'eye-colour',
-    category: 'eyes',
-    title: 'Eye Colour Lens',
-    tag: 'BEAUTY',
-    desc: 'Preview lens colours on a photo of yourself.',
-    leftLabel: 'Pick a lens',
-    studio: 'Pick a colour',
-    href: '/app/eye-color',
-    img: '/samples/portrait-eyecolor.jpg',
-    alt: 'Close-up portrait of a woman with clear blue eyes',
-    icon: Eye,
-  },
-  {
-    id: 'earring-studio',
-    category: 'jewels',
-    title: 'Earring Try-On',
-    tag: 'JEWELRY',
-    desc: 'Compare earring styles on your photo.',
-    leftLabel: 'Compare styles',
-    studio: 'Choose a style',
-    href: '/app/earring',
-    img: '/samples/earring-gold-drop.jpg',
-    alt: 'Polished gold and diamond drop earrings on a white stand',
-    icon: Gem,
+    id: 'looks',
+    category: 'looks',
+    title: 'Saved Looks',
+    tag: 'YOUR PREVIEWS',
+    desc: 'Return to virtual try-on results you chose to save.',
+    leftLabel: 'View saved looks',
+    studio: 'Your gallery',
+    href: '/app/looks',
+    img: '/garments/garment_gold_gown.jpg',
+    alt: 'Occasion dress shown as a saved look reference',
+    icon: Images,
   },
 ];
 
-// ── Virtual Try-On Studios Quick Access ──────────────────────────────────────
+// ── Quick access to the core fashion workflow ─────────────────────────────────
 const TRYON_STUDIOS = [
-  { name: 'Full Look Studio', href: '/app/full-look', icon: Sparkles, label: 'Head to toe' },
-  { name: 'Dress Try-On', href: '/app/studio', icon: Shirt, label: 'Flagship' },
-  { name: 'Makeup Studio', href: '/app/makeup', icon: Palette, label: 'Beauty' },
-  { name: 'Hair Studio', href: '/app/studio?mode=hair', icon: Scissors, label: 'Styling' },
-  { name: 'Earrings VTO', href: '/app/earring', icon: Gem, label: 'Jewelry' },
-  { name: 'Ring Try-On', href: '/app/ring', icon: Gem, label: 'Jewelry' },
-  { name: 'Necklace VTO', href: '/app/necklace', icon: Gem, label: 'Jewelry' },
-  { name: 'Eye Color Lens', href: '/app/eye-color', icon: Eye, label: 'Beauty' },
-  { name: 'Nail Studio', href: '/app/nails', icon: Sparkles, label: 'Nails' },
-  { name: 'Shoes Try-On', href: '/app/studio?mode=shoes', icon: Footprints, label: 'Footwear' },
-  { name: 'Bag Try-On', href: '/app/studio?mode=bag', icon: ShoppingBag, label: 'Accessories' },
+  { name: 'Dress Try-On', href: '/app/studio', icon: Shirt, label: 'Start here' },
+  { name: 'Your Wardrobe', href: '/app/wardrobe', icon: ShoppingBag, label: 'Saved pieces' },
+  { name: 'Saved Looks', href: '/app/looks', icon: Images, label: 'Your previews' },
 ];
 
 export default function DashboardPage() {
@@ -270,7 +188,7 @@ export default function DashboardPage() {
 
               {/* Badge */}
               <div className="inline-block px-3.5 py-1 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm text-xs font-medium text-white/95">
-                Clothing, beauty and accessories — ready to try on
+                Try a dress before you decide
               </div>
 
               {/* Display Headline */}
@@ -281,7 +199,7 @@ export default function DashboardPage() {
 
               {/* Subtitle */}
               <p className="text-sm sm:text-base text-white/90 max-w-lg leading-relaxed font-normal">
-                Choose a clothing or beauty studio, upload a photo or start from a sample, and preview the style on your own image.
+                Start with a sample dress or upload one you found. Add your photo to see a YouCam virtual try-on preview.
               </p>
 
               {/* Select Category Pill Bar */}
@@ -301,32 +219,32 @@ export default function DashboardPage() {
                 <div className="flex -space-x-3 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                  src="/samples/portrait-eyecolor.jpg"
-                  alt="Makeup inspiration portrait"
+                  src="/garments/garment_emerald_slip.jpg"
+                  alt="Emerald dress sample"
                     className="inline-block w-10 h-10 rounded-full ring-2 ring-white object-cover"
                   />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/samples/earring-gold-drop.jpg"
-                    alt="Gold earrings preview"
+                    src="/garments/garment_gold_gown.jpg"
+                    alt="Evening dress sample"
                     className="inline-block w-10 h-10 rounded-full ring-2 ring-white object-cover"
                   />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/samples/portrait-eyecolor.jpg"
-                    alt="Blue-eyed portrait preview"
+                    src="/garments/garment_floral_blouse.jpg"
+                    alt="Floral blouse sample"
                     className="inline-block w-10 h-10 rounded-full ring-2 ring-white object-cover"
                   />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-white leading-tight">10 virtual try-on studios</p>
+                  <p className="text-xs font-bold text-white leading-tight">One focused dress try-on flow</p>
                   <div className="flex items-center gap-1 mt-0.5">
-                    <div className="flex text-amber-300" aria-hidden="true">
+                    <div className="flex text-white" aria-hidden="true">
                       {[...Array(3)].map((_, i) => (
                         <Sparkles key={i} size={11} />
                       ))}
                     </div>
-                    <span className="text-[10px] font-semibold text-white/90">Clothing · beauty · accessories</span>
+                    <span className="text-[10px] font-semibold text-white/90">Upload · preview · save</span>
                   </div>
                 </div>
               </div>
@@ -432,7 +350,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-center gap-4">
             <span className="h-[1.5px] w-12 bg-gradient-to-r from-transparent to-[var(--blue-600)]/60" />
             <h2 className="font-display text-xl sm:text-2xl font-bold text-[var(--blue-700)] tracking-wide">
-              Explore by studio
+              Explore your style space
             </h2>
             <span className="h-[1.5px] w-12 bg-gradient-to-l from-transparent to-[var(--blue-600)]/60" />
           </div>
@@ -485,10 +403,10 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-900">
-                Explore Mirror Moment Studios
+                Your dress try-on space
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Choose a studio to preview clothing, hair and beauty styles on your photo.
+              Try a dress, keep pieces in your wardrobe, and revisit the looks you save.
               </p>
             </div>
             <Link
@@ -571,10 +489,10 @@ export default function DashboardPage() {
         <section className="space-y-4 pt-4">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl font-bold text-slate-900">
-              10 AI Virtual Studios
+              Your fashion workspace
             </h2>
             <span className="text-xs font-semibold text-slate-500">
-              No app install · Photo-based previews
+              Dress try-on, wardrobe, and saved previews
             </span>
           </div>
 

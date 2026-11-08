@@ -16,7 +16,6 @@ import clsx from 'clsx';
 const NAV_ITEMS = [
   { href: '/app', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/app/studio', label: 'Studio', icon: Wand2 },
-  { href: '/app/full-look', label: 'Full Look', icon: Sparkles },
   { href: '/app/wardrobe', label: 'Wardrobe', icon: Shirt },
   { href: '/app/looks', label: 'Looks', icon: ImageIcon },
   { href: '/app/settings', label: 'Settings', icon: Settings },
@@ -195,35 +194,34 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 }
 
 const INSPIRATION: Record<string, { title: string; note: string; cards: { label: string; detail: string; href: string; image: string; alt: string }[] }> = {
-  '/app': { title: 'A little inspiration for your next look', note: 'Explore a style, start with a sample, and make it your own.', cards: [
+  '/app': { title: 'A little inspiration for your next look', note: 'Start with a sample dress, or return to the pieces you have saved.', cards: [
     { label: 'Find your next outfit', detail: 'Preview dresses and build a wardrobe you love.', href: '/app/studio', image: '/garments/garment_emerald_slip.jpg', alt: 'Editorial fashion outfit inspiration' },
-    { label: 'Add a finishing touch', detail: 'Try a new beauty or accessory detail.', href: '/app/earring', image: '/samples/earring-gold-drop.jpg', alt: 'Delicate earring styling inspiration' },
-    { label: 'See colour differently', detail: 'Explore a fresh eye colour with a sample portrait.', href: '/app/eye-color', image: '/samples/portrait-eyecolor.jpg', alt: 'Blue-eyed beauty portrait' },
+    { label: 'Revisit your wardrobe', detail: 'Open the dresses you have saved to your collection.', href: '/app/wardrobe', image: '/garments/garment_olive_overshirt.jpg', alt: 'Saved clothing in a personal wardrobe' },
+    { label: 'Return to a preview', detail: 'See the virtual try-on looks you chose to save.', href: '/app/looks', image: '/garments/garment_gold_gown.jpg', alt: 'Occasion dress shown as a saved look reference' },
   ] },
-  '/app/studio': { title: 'Make the look your own', note: 'Start with a ready-made sample or bring a photo of your own.', cards: [
-    { label: 'Hair, your way', detail: 'Preview a different cut or colour on a sample.', href: '/app/studio?mode=hair', image: '/samples/hair-curly.jpg', alt: 'Glossy hairstyle inspiration' },
-    { label: 'The perfect bag', detail: 'Try a bag with your outfit before you commit.', href: '/app/studio?mode=bag', image: '/samples/bag-tote.jpg', alt: 'Structured handbag inspiration' },
-    { label: 'Save your favourites', detail: 'Keep your best combinations together.', href: '/app/looks', image: '/samples/shoes-heels.jpg', alt: 'Polished fashion look inspiration' },
+  '/app/studio': { title: 'Make the dress your own', note: 'Try a ready-made sample or bring a dress photo of your own.', cards: [
+    { label: 'Explore dress samples', detail: 'Choose a garment image and preview it on your photo.', href: '/app/studio', image: '/garments/garment_gold_gown.jpg', alt: 'Evening dress sample' },
+    { label: 'Save a piece for later', detail: 'Keep dresses you want to try again in your wardrobe.', href: '/app/wardrobe', image: '/garments/garment_olive_overshirt.jpg', alt: 'Saved piece in a personal wardrobe' },
+    { label: 'Save your favourites', detail: 'Keep your best combinations together.', href: '/app/looks', image: '/garments/garment_emerald_slip.jpg', alt: 'Emerald dress try-on inspiration' },
   ] },
-  '/app/full-look': { title: 'Build a look from head to toe', note: 'Choose several studios and explore each part of your look.', cards: [
-    { label: 'Start with an outfit', detail: 'Try a dress, then build around it.', href: '/app/studio', image: '/garments/garment_emerald_slip.jpg', alt: 'Fashion outfit inspiration' },
-    { label: 'Add your finishing touches', detail: 'Explore beauty styles and accessories.', href: '/app/earring', image: '/samples/earring-gold-drop.jpg', alt: 'Earring styling inspiration' },
-    { label: 'Keep your favourites', detail: 'Save looks to revisit in your gallery.', href: '/app/looks', image: '/samples/shoes-heels.jpg', alt: 'Complete look inspiration' },
+  '/app/full-look': { title: 'Plan a look for your occasion', note: 'Start with a dress, then keep the previews you want to revisit.', cards: [
+    { label: 'Start with a dress', detail: 'Try a sample or upload a garment photo.', href: '/app/studio', image: '/garments/garment_emerald_slip.jpg', alt: 'Emerald dress sample' },
+    { label: 'Keep your pieces', detail: 'Save garments you may want to try again.', href: '/app/wardrobe', image: '/garments/garment_olive_overshirt.jpg', alt: 'Saved garment in your wardrobe' },
+    { label: 'Revisit a preview', detail: 'Open try-on results you chose to save.', href: '/app/looks', image: '/garments/garment_gold_gown.jpg', alt: 'Saved occasion dress preview' },
   ] },
-  '/app/wardrobe': { title: 'Style what is already yours', note: 'Build an outfit around pieces you have saved.', cards: [
+  '/app/wardrobe': { title: 'Style what is already yours', note: 'Keep the dresses and previews you want to come back to.', cards: [
     { label: 'Try a new piece', detail: 'See how a dress might look before adding it.', href: '/app/studio', image: '/garments/garment_emerald_slip.jpg', alt: 'Dress styling inspiration' },
-    { label: 'Create a complete look', detail: 'Bring clothing and accessories together.', href: '/app/looks', image: '/samples/shoes-heels.jpg', alt: 'Complete outfit inspiration' },
-    { label: 'Finish with a detail', detail: 'Explore earrings that complement your style.', href: '/app/earring', image: '/samples/earring-gold-drop.jpg', alt: 'Earring detail inspiration' },
+    { label: 'Open saved previews', detail: 'Revisit the try-on results you chose to keep.', href: '/app/looks', image: '/garments/garment_gold_gown.jpg', alt: 'Saved dress preview' },
   ] },
   '/app/looks': { title: 'Your next favourite combination', note: 'Small changes can give a familiar outfit a new feel.', cards: [
     { label: 'Try a new dress', detail: 'Preview a piece with your own photo or a sample.', href: '/app/studio', image: '/garments/garment_emerald_slip.jpg', alt: 'Fashion look inspiration' },
-    { label: 'Change the mood', detail: 'Explore a soft new eye colour.', href: '/app/eye-color', image: '/samples/portrait-eyecolor.jpg', alt: 'Beauty portrait with blue eyes' },
-    { label: 'Add a little shine', detail: 'Find earrings to finish the look.', href: '/app/earring', image: '/samples/earring-gold-drop.jpg', alt: 'Earrings as a finishing detail' },
+    { label: 'Try another style', detail: 'Start a new preview with a different garment photo.', href: '/app/studio', image: '/garments/garment_floral_blouse.jpg', alt: 'Floral blouse garment sample' },
+    { label: 'Open your wardrobe', detail: 'Return to clothing pieces you have saved.', href: '/app/wardrobe', image: '/garments/garment_olive_overshirt.jpg', alt: 'Saved garment in a wardrobe' },
   ] },
   '/app/settings': { title: 'Your style space, your way', note: 'Your photos stay private. You control your preferences and saved looks.', cards: [
     { label: 'Your wardrobe', detail: 'Keep track of the pieces you have tried.', href: '/app/wardrobe', image: '/garments/garment_emerald_slip.jpg', alt: 'Wardrobe styling inspiration' },
-    { label: 'Your saved looks', detail: 'Return to combinations you want to remember.', href: '/app/looks', image: '/samples/shoes-heels.jpg', alt: 'Saved outfit inspiration' },
-    { label: 'Try something new', detail: 'Explore styles with a sample photo.', href: '/app/studio', image: '/samples/bag-tote.jpg', alt: 'Fashion accessory inspiration' },
+    { label: 'Your saved looks', detail: 'Return to try-on previews you want to remember.', href: '/app/looks', image: '/garments/garment_gold_gown.jpg', alt: 'Saved occasion dress preview' },
+    { label: 'Try another dress', detail: 'Start with a sample or upload a garment photo.', href: '/app/studio', image: '/garments/garment_floral_blouse.jpg', alt: 'Floral blouse sample' },
   ] },
 };
 

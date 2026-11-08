@@ -1,208 +1,76 @@
-# Mirror Moment — Skin & Style Intelligence
+# Mirror Moment
 
-> **Know before you buy. Skin and style, judged on your face.**  
-> *Built for the YouCam API Skin AI & eCommerce VTO Hackathon (Tracks: Skin AI + eCommerce VTO)*
+**Try a dress before you decide.** Mirror Moment lets a shopper lift a dress from a photo, preview it on their own photo, and keep the pieces and results they want to revisit.
 
----
+This repository is the Mirror Vibes project copy. The current app is built around the **Try-On Commerce** track: one clear dress try-on flow supported by a personal wardrobe and saved looks.
 
-## 1. Problem Statement & Impact
+## What the app does
 
-Shoppers today stand in front of store shelves or scroll e-commerce product pages asking two fundamental questions:
-1. *"Is this skincare product actually right for my unique skin, or will it break me out?"*
-2. *"Will this outfit color and cut look flattering on me?"*
+1. Choose a sample dress or upload a clear garment photo.
+2. Review the garment extraction made in the browser.
+3. Add a front-facing photo of yourself.
+4. Generate a virtual try-on preview with the server-side YouCam AI-Cloth integration.
+5. Save a garment or result to your wardrobe, or download the result.
 
-### The Industry Blindspot
-- **Ingredient Scanners Judge in Isolation:** Mainstream cosmetic scanner apps score formulas on a generic 0–100 scale based on ingredient hazard lists. They have zero context of the shopper's individual skin barrier, cannot detect ingredient stacking conflicts inside a routine, and frequently mislabel safe actives as toxic.
-- **Siloed Experiences:** Skincare analysis and apparel try-on live in completely disconnected apps, leaving consumers to guess how color schemes interact with their skin tone and facial vitality.
-- **Costly Return Rates:** Apparel e-commerce suffers from return rates between **25% to 40%** (versus 8%–10% for non-fashion categories, *Videopoint* / *Style3D*), driven largely by color mismatch and fit uncertainty. Virtual try-on technology has been reported to drive up to a **320% conversion lift** (*Perfect Corp case studies*), but lacks personalization tied to skin undertone and vitality.
+The app also contains other experimental styling pages. They are not part of the main hackathon demonstration because the dress workflow aligns most closely with the commerce challenge.
 
-**Mirror Moment bridges this gap:** It scans your skin using **YouCam Skin AI**, maps your active skin concerns, evaluates skincare products deterministically with reason-by-reason evidence linking ingredients to your skin, detects routine stacking conflicts, and transitions into color-matched **YouCam Apparel Virtual Try-On**.
+## API and hackathon fit
 
----
+The current code integrates Perfect Corp's YouCam AI-Cloth virtual try-on through server routes. The API key stays on the server. The hackathon's Devpost page currently still shows `[YOUR TRY-ON API NAME]` in its requirements, so confirm with the organizers that YouCam is the required or accepted provider before describing this project as compliant with that API requirement.
 
-## 2. Core Features
+The project is intended for the **Try-On Commerce** track. Its value is helping shoppers preview a garment before buying and keeping the garments and results they want to revisit.
 
-- 📸 **Mobile-First Skin AI Scan:** Selfie upload and camera capture with automated face framing verification (>60% frame width, resolution guidance) powered by YouCam Skin AI.
-- 🎯 **Top-3 Concern Profile:** Maps multi-concern metrics (`dark_circle_v2`, `moisture`, `pore`, `wrinkle`, `redness`, `acne`, `oiliness`, `texture`) to prioritized severity bars and plain-language guidance.
-- 🧪 **Deterministic Verdict Engine:** 
-  - Generates transparent **BUY**, **PATCH-TEST FIRST**, or **SKIP** verdicts.
-  - Every reason explicitly links one ingredient to one concern from the user's scan with peer-reviewed literature citations.
-  - **Zero Unsafe BUY Guarantee:** Known irritants or cautions for a user's primary concern are strictly barred from receiving a BUY verdict.
-  - **Unknown Ingredient Safeguard:** Any uncataloged botanical or synthetic ingredient caps the verdict at PATCH-TEST FIRST.
-- ⚡ **Routine Conflict Detection:** Evaluates cross-product ingredient interactions (e.g. Retinoids + AHAs, Retinoids + Benzoyl Peroxide) to prevent barrier compromise.
-- 👗 **Color Harmonization & Apparel VTO:** Stylist engine recommends color families (e.g. Navy, Sage Olive, Crisp White) based on skin tone and redness levels, rendering instant garment try-ons on the user's photo.
-- 📈 **Weekly Progress Tracking:** Visualizes 4-week skin health index progression.
-- 🔒 **Privacy-First Architecture:** Photos are streamed ephemerally through an authenticated server-side proxy and are **never stored permanently** on disk or logged in telemetry.
+## Run locally
 
----
+### Requirements
 
-## How it works
+- Node.js 24.14 or newer
+- npm
+- A Perfect Corp YouCam API key for live try-on
+- Supabase project credentials only if you want cloud storage and cloud try-on history
 
-Mirror Moment connects a Next.js App Router frontend to Perfect Corp's official YouCam API via a dedicated server module (`youcamClient`):
+### Setup
 
-1. **Virtual Dress Try-On (`POST /api/dress-tryon`)**:
-   - Takes your photo and a garment reference image.
-   - Uploads both images through YouCam File API (`POST /s2s/v2.0/file`) to obtain secure presigned S3 storage identifiers (`src_file_id`, `ref_file_id`).
-   - Dispatches a try-on task via `POST /s2s/v2.0/task/cloth-v4` with `garment_category: "full_body"`.
-   - Polls `GET /s2s/v2.0/task/cloth-v4/{task_id}` until completion, caches the result locally, and renders a before/after comparison slider.
-
-2. **AI Hairstyle & Color (`POST /api/hair-tryon`, `GET /api/hair-templates`)**:
-   - Requires a front-facing face photo with visible shoulders.
-   - Calls `POST /s2s/v2.1/task/hair-transfer` using a chosen template ID or custom reference image.
-   - Caches official YouCam template lists for 1 hour. Hair color is marked *coming soon* to guarantee zero fake endpoints.
-
-3. **Virtual Makeup Try-On (`POST /api/makeup-tryon`)**:
-   - Dynamically compiles palettes for enabled cosmetics: lipstick (color, texture matte/gloss/satin, intensity), eyeshadow, blush, and foundation.
-   - Dispatches `POST /s2s/v2.0/task/makeup-vto` with version `"1.0"`.
-
-4. **Face Retouch & Glow (`POST /api/retouch`)**:
-   - Maps skin smoothing to the documented `skin_smooth` palette inside `makeup-vto` and teeth whitening to `POST /s2s/v2.0/task/teeth-whitening`.
-
-5. **Mock Mode & Safety**:
-   - Setting `YOUCAM_MOCK=true` runs zero-unit simulated executions with 2-second timing for UI testing and reviews.
-   - Secret API keys remain strictly server-side and are never exposed to the client.
-
----
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Mobile Web UI                          │
-│               React 19 + TypeScript + Vite                  │
-│       (ScanScreen, SkinProfileView, ProductChecker,         │
-│          RoutineView, VirtualTryOnView, ProgressView)       │
-└──────────────────────────────┬──────────────────────────────┘
-                               │ JSON / Multipart
-┌──────────────────────────────▼──────────────────────────────┐
-│                  Server Proxy (Express + Node)              │
-│       • Authenticated S2S Bearer token handling             │
-│       • Response caching (CACHE_DIR / data/fixtures)        │
-│       • Telemetry logger (evidence/api-log)                 │
-└──────────────┬───────────────────────────────┬──────────────┘
-               │                               │
-┌──────────────▼──────────────┐ ┌──────────────▼──────────────┐
-│     YouCam Skin AI API      │ │    YouCam Apparel VTO       │
-│  • /s2s/v2.0/file           │ │  • /s2s/v2.0/file           │
-│  • /s2s/v2.0/task/skin-     │ │  • /s2s/v2.0/task/cloth     │
-│    analysis                 │ │  • S3 presigned asset upload│
-└─────────────────────────────┘ └─────────────────────────────┘
-               ▲                               ▲
-┌──────────────┴───────────────────────────────┴──────────────┐
-│                 Local Verdict Engine (Code)                 │
-│  • Parser: INCI tokenization, synonym resolution            │
-│  • Matcher: Concern rules + formula conflict rules          │
-│  • Scorer: Deterministic BUY / PATCH-TEST / SKIP            │
-│  • Knowledge Base: 81 curated ingredients (CosIng / FDA)    │
-└─────────────────────────────────────────────────────────────┘
+```powershell
+git clone https://github.com/Edv6-tech/mirror-vibes.git
+cd mirror-vibes
+npm ci
+Copy-Item .env.example .env.local
 ```
 
----
+Set `YOUCAM_API_KEY` in `.env.local` for live try-on. Never put the key in a `NEXT_PUBLIC_` variable or commit it. Start the app with:
 
-## 4. YouCam API Integration & Unit Economics
+```powershell
+npm run dev
+```
 
-### Endpoints Implemented
-1. **File Management (`POST /s2s/v2.0/file`):** 
-   - Registers user selfie and garment references.
-   - Streams image binaries directly via presigned Amazon S3 upload URLs.
-2. **Skin AI Analysis (`POST /s2s/v2.0/task/skin-analysis`):**
-   - Dispatches asynchronous diagnostic tasks with target action metrics: `["wrinkle", "pore", "texture", "acne", "age_spot", "redness", "oiliness", "moisture", "dark_circle_v2", "skin_type"]`.
-   - Polls task status and unpacks detailed `score_info.json` report containing raw scores, UI scores, skin age, and diagnostic overlays.
-3. **Apparel Virtual Try-On (`POST /s2s/v2.0/task/cloth`):**
-   - Submits `src_file_id` (user photo) and `ref_file_id` (garment).
-   - Polls task status until rendering completes, returning direct S3 rendered image URLs.
+Open `http://localhost:3000`. The app uses SQLite for email and password accounts. By default, the database is created at `data/mirror-moment.sqlite`; set `SQLITE_DB_PATH` to change its location.
 
-### Unit Protection & Caching Strategy
-- The account has approximately 1,000 free API units.
-- **Aggressive Caching:** All successful diagnostic reports and rendered try-ons are cached under `data/fixtures/` keyed by garment/photo identifiers.
-- Re-querying an existing try-on or demo profile returns in **< 10ms** with **0 API units consumed**.
-- Telemetry logs with scrubbed secrets and zero image data are saved in `evidence/api-log/`.
+### Optional cloud storage
 
----
+The app can use Supabase for private uploaded assets and saved try-on records. Set `SUPABASE_URL` and the server-only `SUPABASE_SECRET_KEY`, then apply the SQL migrations in `supabase/migrations` to the project. Do not expose the secret key to the browser. A production deployment also needs persistent storage for the SQLite database.
 
-## 5. Measured Quality Evidence
+## Images and privacy
 
-To guarantee consumer safety and substantiate our claims, we built a 30-case benchmark test suite (`quality/testset.json`) crossing realistic formulations against four distinct skin archetypes (Sensitive/Redness, Dry/Dehydrated, Oily/Acne-prone, and Mature/Hyperpigmented).
+Garment extraction runs in the browser. To create a try-on, the person's photo and garment image are sent to the configured try-on provider. If cloud storage is configured, saved assets are stored in private buckets. Only use photos you have permission to process, and do not upload photos of minors.
 
-| Metric | Target | Measured Result | Status |
-| :--- | :--- | :--- | :--- |
-| **Unsafe BUY Results** | **0** | **0** | ✅ **PASS** |
-| **Expert Label Agreement** | >= 85.0% | **86.7%** (26/30) | ✅ **PASS** |
-| **Formula Conflicts Caught** | All active conflicts | **4 of 4 caught** | ✅ **PASS** |
+## Useful routes
 
-*Full quality report with individual test cases available at [`evidence/quality/quality-report.md`](evidence/quality/quality-report.md).*
+- `/` — project landing page
+- `/login` and `/signup` — email and password account access
+- `/app` — fashion dashboard
+- `/app/studio` — dress try-on flow
+- `/app/wardrobe` — saved garment collection
+- `/app/looks` — saved try-on results
+- `/app/settings` — account and privacy controls
 
----
+## Environment variables
 
-## 6. Quickstart Guide
+Copy `.env.example` to `.env.local` and fill only the values needed for your setup. Keep all secret values local. `.env.local` is ignored by Git.
 
-### Prerequisites
-- Node.js v20+ (tested on v24)
-- npm v10+
+## Hackathon submission checklist
 
-### Installation & Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone <repo-url>
-   cd fashion
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables:**
-   Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-   Add your YouCam API key to `.env`:
-   ```env
-   YOUCAM_API_KEY=your_key_here
-   YOUCAM_BASE_URL=https://yce-api-01.makeupar.com
-   PORT=3001
-   DEMO_MODE=false
-   ```
-
-4. **Run the Application:**
-   ```bash
-   npm run dev
-   ```
-   - Express Proxy Server: `http://localhost:3001`
-   - Frontend Vite Web App: `http://localhost:5173`
-
-5. **Run the Quality & Acceptance Test Suite:**
-   ```bash
-   # Run Vitest unit tests
-   npm test
-
-   # Run the 30-case quality evaluation
-   npm run quality
-   ```
-
----
-
-## 7. Accessibility & Mobile Optimization
-
-- **Color Contrast:** Base UI text contrast is **17.5:1** (#F8FAFC on #0B0F19), far exceeding the WCAG AA 4.5:1 standard.
-- **Tap Targets:** Every button, select, and interactive element enforces a minimum touch target size of **44px × 44px**.
-- **Keyboard Navigation:** Full focus ring visibility with semantic HTML and ARIA labels.
-- **Multimodal Verdicts:** Verdicts are conveyed simultaneously through text labels, distinct icons (Checkmark, Triangle, X-Circle), and color coding.
-
----
-
-## 8. Disclaimers & Regulatory Notice
-
-- **Not Medical Advice:** Mirror Moment provides cosmetic shopping decision support only. It does not diagnose, treat, prevent, or cure any medical or dermatological condition.
-- **Concentration Disclaimer:** Standard cosmetic ingredient declarations list ingredients in descending order of predominance but do not disclose exact percentage concentrations. Verdicts provide probabilistic safety screening, not clinical certainty.
-
----
-
-## 9. Data Sources & Scientific References
-
-- **EU CosIng:** Cosmetic Ingredient Database, European Commission Directorate-General for Internal Market, Industry, Entrepreneurship and SMEs.
-- **FDA OTC Drug Monographs:** Title 21 of the Code of Federal Regulations (Acne and Skin Protectant products).
-- **Mukherjee S, et al.** *Retinoids in the treatment of skin aging: an overview of clinical efficacy and safety.* Clin Interv Aging. 2006.
-- **Tang SC, Yang JH.** *Dual Effects of Alpha-Hydroxy Acids on the Skin.* Molecules. 2018.
-- **Arif T.** *Salicylic acid as a peeling agent: a comprehensive review.* Clin Cosmet Investig Dermatol. 2015.
-- **Draelos ZD, et al.** *Niacinamide-containing facial moisturizer improves skin barrier and benefits subjects with rosacea.* Cutis. 2005.
+- Confirm the exact try-on API required by the organizers.
+- Provide judges with a working demo account or another reliable testing path.
+- Include screenshots and a public 1 to 3 minute demo video that shows the app running and explains the API integration.
+- Explain any significant changes made to the existing project during the submission period.

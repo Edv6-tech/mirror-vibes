@@ -340,9 +340,9 @@ export default function LandingPage() {
 
           {/* Floating step cards */}
           <div className="flex items-end justify-center gap-4 mt-14 flex-wrap">
-            <HeroCard category="Fashion" label="A dress for the moment" image="/garments/garment_emerald_slip.jpg" alt="Model in a flowing red occasion dress" delay={0.3} />
-            <HeroCard category="Accessories" label="The finishing touch" image="/samples/bag-crossbody.jpg" alt="Crossbody bag styling sample" delay={0.5} />
-            <HeroCard category="Beauty" label="A fresh point of view" image="/samples/portrait-eyecolor.jpg" alt="Portrait showing a blue eye colour preview" delay={0.7} />
+            <HeroCard category="Try on" label="A dress for the moment" image="/garments/garment_emerald_slip.jpg" alt="Model in a flowing emerald occasion dress" delay={0.3} />
+            <HeroCard category="Save" label="Keep a piece in your wardrobe" image="/garments/garment_olive_overshirt.jpg" alt="Clothing piece ready to save to a wardrobe" delay={0.5} />
+            <HeroCard category="Revisit" label="Return to a saved look" image="/garments/garment_gold_gown.jpg" alt="Occasion dress sample for a saved look" delay={0.7} />
           </div>
         </section>
       </AuroraBackground>
@@ -385,7 +385,7 @@ export default function LandingPage() {
               className="font-display font-semibold text-[var(--ink-900)]"
               style={{ fontSize: 'clamp(32px, 4vw, 52px)' }}
             >
-              Style the whole look
+              Find a dress for your occasion
             </h2>
             <div className="flex flex-wrap justify-center gap-2">
               {['Wedding guest', 'Evening', 'Everyday'].map((label) => (
@@ -397,9 +397,9 @@ export default function LandingPage() {
           <FadeRise delay={0.1}>
             <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-3">
               {[
-                { image: '/garments/garment_gold_gown.jpg', alt: 'Model wearing a plum evening gown', title: 'Occasion outfits', detail: 'See how a new silhouette could feel.' },
-                { image: '/samples/earring-gold-drop.jpg', alt: 'Gold drop earrings on a display stand', title: 'Finishing details', detail: 'Bring accessories into the picture.' },
-                { image: '/samples/hair-curly.jpg', alt: 'Curly hairstyle sample', title: 'Beauty changes', detail: 'Explore hair and beauty together.' },
+                { image: '/garments/garment_gold_gown.jpg', alt: 'Evening dress sample for a special occasion', title: 'A special evening', detail: 'Preview an occasion dress on your photo.' },
+                { image: '/garments/garment_emerald_slip.jpg', alt: 'Emerald dress sample', title: 'A wedding guest look', detail: 'See how a different silhouette might look.' },
+                { image: '/garments/garment_floral_blouse.jpg', alt: 'Floral blouse garment sample', title: 'Everyday style', detail: 'Try a piece you found while browsing.' },
               ].map((item) => (
                 <article key={item.title} className="group overflow-hidden rounded-[24px] border border-[var(--line)] bg-white shadow-[var(--shadow-soft)] transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -439,8 +439,8 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               { icon: <Shirt size={28} className="text-[var(--blue-600)]" aria-hidden="true" />, title: 'Works with worn dresses', desc: 'From anyone — model, friend, social post. We lift the dress, not the person.' },
-              { icon: <BookMarked size={28} className="text-[var(--blue-600)]" aria-hidden="true" />, title: 'Your wardrobe, saved', desc: 'Lifted dresses live in your wardrobe. Try them again any time.' },
-              { icon: <Users size={28} className="text-[var(--blue-600)]" aria-hidden="true" />, title: 'Compare and ask friends', desc: 'Share a shortlist link. Friends vote on which dress is the one.' },
+              { icon: <BookMarked size={28} className="text-[var(--blue-600)]" aria-hidden="true" />, title: 'Your wardrobe, saved', desc: 'Keep dresses you want to revisit in your wardrobe.' },
+              { icon: <Users size={28} className="text-[var(--blue-600)]" aria-hidden="true" />, title: 'See before and after', desc: 'Compare your original photo with the generated try-on preview.' },
             ].map(({ icon, title, desc }, i) => (
               <FadeRise key={title} delay={i * 0.1}>
                 <GlassCard variant="light" radius="24" className="flex flex-col gap-3 h-full">

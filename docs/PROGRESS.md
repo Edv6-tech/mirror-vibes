@@ -753,3 +753,15 @@ The official Clothes V4 guide still conflicts about target-photo framing; no liv
 |---|---|
 | **Login palette** | Applied the dashboard theme scope to the login page so its blue accents and aurora become the existing coral-red and white palette without changing shared tokens globally. |
 | **Verification** | Confirmed the login route responds after the auth redirect fix. No test suite was run. |
+
+## Session Update — 2026-11-08 (HackTheFashion scope)
+
+| Area | Detail |
+|---|---|
+| **Track focus** | Centered the project on Try-On Commerce: dress try-on, wardrobe, and saved looks. |
+| **Dashboard** | Replaced the 10-studio claim and beauty-focused entry cards with working links to the fashion flow, wardrobe, and saved results. Category buttons now filter these three destinations. |
+| **Landing page** | Replaced beauty and accessory promotion with garment, wardrobe, and saved-look examples. Removed the unimplemented friend-voting claim. |
+| **Repository guidance** | Rewrote the README around the current Next.js app and corrected `.env.example` to match the server environment variable names. Removed unsubstantiated skin analysis and benchmark claims. |
+| **API requirement** | Left the provider integration unchanged. The Devpost page still contains an API-name placeholder, so organizer confirmation is needed before claiming compliance. |
+| **Out of scope** | Other styling routes remain in the code but are no longer promoted in the primary navigation or dashboard. |
+| **Verification** | No tests or build were run. |
